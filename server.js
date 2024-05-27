@@ -35,10 +35,9 @@ app.use(express.urlencoded({ extended: false }));
 // Adding css
 app.use(express.static(path.join(__dirname, "public")));
 
-const Movies = require("./models/messages");
-const Users = require("./models/users");
-const authRouter = require("./controllers/auth");
+const Users = require("./models/users.js");
 
+// Initializing the session
 app.use(
     session({
       secret: process.env.SECRET_PASSWORD, // Replace with a strong secret key
@@ -47,14 +46,27 @@ app.use(
       cookie: { secure: false }, // Secure should be true in production if you're using HTTPS
     })
 );
-  
+
+// Enables function globally in the browser
 app.use(function (req, res, next) {
     res.locals.user = req.session.user;
     next();
 });
-  
+
+const authController = require('./controllers/auth.js');
+app.use('/auth', authController);
+
+// Landing page
+app.get('/', (req, res) => {
+    res.render('home.ejs', {
+      user: req.session.user,
+    });
+});
+
+// If the port doesn't exist, define it as 3000
 const port = process.env.PORT ? process.env.PORT : 3000;
 
+// Keeps the connection open for requests
 app.listen(port, () => {
   console.log("Listening on port ", process.env.PORT);
 });
