@@ -1,5 +1,5 @@
 
-// Makes it possible to reference environment variables from .env into process.env
+// Adds environment variables from .env into process.env (node environment)
 require('dotenv').config();
 
 // Require express framework -> Provides broad features for building web and mobile applications
@@ -29,7 +29,7 @@ mongoose.connect(process.env.MONGODB_URI);
 // Allows request.body object to be read in the handlers
 app.use(express.json());
 
-// Tell express to expect data from our form
+// Tell express to expect data from our form -> Remove data from url and put into request body
 app.use(express.urlencoded({ extended: false }));
 
 // Adding css
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const Movies = require("./models/messages");
 const Users = require("./models/users");
-const authRouter = require("./controllers/authControllers");
+const authRouter = require("./controllers/auth");
 
 app.use(
     session({
