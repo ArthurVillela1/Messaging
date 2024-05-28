@@ -2,6 +2,9 @@
 // Adds environment variables from .env into process.env (node environment)
 require('dotenv').config();
 
+const authController = require('./controllers/auth.js');
+const messagesController = require('./controllers/messages.js');
+
 // Require express framework -> Provides broad features for building web and mobile applications
 const express = require('express');
 const app = express();
@@ -35,9 +38,10 @@ app.use(express.urlencoded({ extended: false }));
 // Adding css
 app.use(express.static(path.join(__dirname, "public")));
 
-const Users = require("./models/users.js");
+const Users = require("./models/user.js");
 
-// Initializing the session
+// Creating a session for authentication and authorization
+// Every request from a client will create a session and attatch it to HTTP headers
 app.use(
     session({
       secret: process.env.SECRET_PASSWORD, // Replace with a strong secret key
@@ -53,8 +57,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-const authController = require('./controllers/auth.js');
 app.use('/auth', authController);
+app.use('/messages', messagesController);
 
 // Landing page
 app.get('/', (req, res) => {

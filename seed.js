@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 require('dotenv').config();
 
-const Messages = require('./models/messages.js')
+const Message = require('./models/messages.js')
 
 async function seed() {
     console.log('Seeding has begun! 🌱')
@@ -13,10 +13,7 @@ async function seed() {
     // ! When seeding, we can clear the database like so:
     await mongoose.connection.db.dropDatabase()
   
-    // ! Replace diehard with an array of movies!
-    const movies = await Movies.create(moviesData)
-  
-    console.log(movies)
+    //const messages = await Message.create(messagesData)
   
     mongoose.disconnect()
   }

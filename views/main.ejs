@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+    <h1>Hey <%=user.usermame%></h1>
+    <form action="/messages/main" method="POST">
+        <label for="msg">What are you thinking?</label>
+        <input type="text" name="msg" id="msg">
+        <button type="submit">Post Message</button>
+    </form>
+</body>
+</html>

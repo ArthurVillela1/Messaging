@@ -14,4 +14,5 @@ const userSchema = new mongoose.Schema({
 });
 
 // Creates de user area in the database and attach the schema
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+module.exports = User
