@@ -31,7 +31,7 @@ const userInDatabase = await User.findOne({ username: req.body.username });
     req.body.password = hash;
 
     const user = await User.create(req.body);
-    res.send(`Thanks for signing up ${user.username}`)
+    res.redirect("/auth/sign-in")
 });
 
 // POST sign-in

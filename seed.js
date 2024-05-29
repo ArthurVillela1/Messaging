@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 require('dotenv').config();
 
-const Message = require('./models/messages.js')
+const Message = require('./models/message.js')
 
 async function seed() {
     console.log('Seeding has begun! 🌱')

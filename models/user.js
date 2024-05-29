@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  },
+  }
 });
 
 // Creates de user area in the database and attach the schema

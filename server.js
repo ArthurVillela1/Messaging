@@ -38,10 +38,10 @@ app.use(express.urlencoded({ extended: false }));
 // Adding css
 app.use(express.static(path.join(__dirname, "public")));
 
-const Users = require("./models/user.js");
-
-// Creating a session for authentication and authorization
+// Creating a session (cookie) for authentication and authorization
 // Every request from a client will create a session and attatch it to HTTP headers
+// These cookies are only alive when the server is running
+// These cookies exist regardless of the user being signed in
 app.use(
     session({
       secret: process.env.SECRET_PASSWORD, // Replace with a strong secret key
@@ -57,6 +57,7 @@ app.use(function (req, res, next) {
     next();
 });
 
+// Accessing the controllers to enable HTTP requests (get, post, put and delete)
 app.use('/auth', authController);
 app.use('/messages', messagesController);
 

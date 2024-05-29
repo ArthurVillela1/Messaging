@@ -4,14 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 <body>
     <%- include('./partials/nav') %>
-    <h1>Hey <%=user.usermame%></h1>
+    <p>Hey <%= user.username %>!</p>
     <form action="/messages/main" method="POST">
-        <label for="msg">What are you thinking?</label>
-        <input type="text" name="msg" id="msg">
-        <button type="submit">Post Message</button>
+        <label for="content">What are you thinking?</label>
+        <input type="text" name="content" id="content">
+        <button type="submit" id="postbutton" role="button">Post</button>
     </form>
+    <ul>
+        <% messages.reverse().forEach((message,index) => { %>
+            <% if(index < 20) { %>
+            <li>
+                <%= message.createdBy.username %>
+                <%= message.content %>
+                <% if (message.userId === userId) { %>
+                <form action="/messages/main/<%= message._id %>?_method=DELETE" method="POST"  style="display:inline;"><button type="submit">Delete</button></form>
+            <% } %>
+            </li>
+            <% } %>
+        <% }) %>
+    </ul>
 </body>
 </html>
