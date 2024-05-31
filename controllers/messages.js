@@ -23,7 +23,7 @@ router.get("/main", async (req, res) => {
 //POST message
 router.post('/main', async (req, res) => {
     const { content } = req.body;
-    if (content.length <= 40) {
+    if (content.length <= 30) {
         try {
             // Create the message using mongoose.
             req.body.createdBy = req.session.user.userId
@@ -37,7 +37,7 @@ router.post('/main', async (req, res) => {
             }
         }
     }else{
-        let errorMsg = 'Comment must be 40 characters or less.';
+        let errorMsg = 'Comment must be 30 characters or less.';
         return res.send(errorMsg);
     }
 })
