@@ -1,26 +1,38 @@
-body{
-background:
-radial-gradient(white 15%, transparent 10%) 0 0,
-radial-gradient(white 15%, transparent 10%) 0px 0px,
-radial-gradient(rgba(255,255,255,0.35) 15%, transparent 20%) 0 1px,
-radial-gradient(rgba(255,255,255,0.2) 15%, transparent 20%) 8px 9px;
-background-color:#F0F8FF;
-background-size:16px 16px;
-font-family: "Comic Sans MS", "Comic Sans", cursive;
-}
 
-ul {
-    list-style-type: none;
-}
+html {
+    --s: 211px; /* control the size*/
+    --c1: #b0cfe3;
+    --c2: #b3d2ea;
+    
+    background:
+      radial-gradient(36% 72% at 25% -50%,var(--c2) 98%,#0000)
+       0 0/calc(2*var(--s)) var(--s),
+      radial-gradient(36% 72% at 75% 150%,var(--c2) 98%,#0000)
+       0 0/calc(2*var(--s)) var(--s),
+      radial-gradient(72% 36% at 150% 25%,var(--c2) 98%,#0000)
+       0 0/var(--s) calc(2*var(--s)),
+      radial-gradient(72% 36% at -50% 75%,var(--c2) 98%,#0000)
+       0 0/var(--s) calc(2*var(--s)),
+      repeating-conic-gradient(var(--c2) 0 45deg,var(--c1) 0 25%)
+       0 0/calc(2*var(--s)) calc(2*var(--s));
   
-ul li {
-    margin-bottom: 8px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
-#content, #postbutton {
-    border-radius: 9px;
-    border-width: 1.5px;
+#header1{
+    text-align: center;
 }
+
+#links{
+    text-align: center;
+}
+
+#a1, #a2, #a3, #a4, #a5, #a6, #a7, #a8{
+    margin: 15px;
+    text-decoration: none;
+}
+
+/*-------------------------------------------------------------*/
 
 #content {
     height: 20px;
@@ -30,4 +42,92 @@ ul li {
 #postbutton{
     height: 25px;
     width: 60px;
+}
+
+#content, #postbutton {
+    border-radius: 9px;
+    border-width: 1.5px;
+}
+
+/*-------------------------------------------------------------*/
+
+#editbuttonanchor {
+    text-decoration: none;
+    color: rgb(175, 182, 190);
+}
+
+#editbutton{  
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    border: transparent;
+    background-color: transparent;
+    font-size: 10px;
+}
+
+#editbutton:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#deletebutton{
+    border: transparent;
+    background-color: transparent;
+    font-size: 10px;
+    color: rgb(175, 182, 190);
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+#deletebutton:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#buttonsdiv{
+    margin-left:330px;
+    margin-bottom:300px;
+}
+/*-------------------------------------------------------------*/
+
+ul {
+    list-style-type: none;
+}
+  
+li {
+    border-radius: 15px;
+    border: solid rgb(180, 208,240) 4px;
+    margin-bottom: 5px;
+    background-color: rgb(224, 234, 249);
+    height:75px;
+    max-height: 80px;
+    width: 420px;
+}
+
+.paragraph{
+    margin:10px;
+}
+
+/*-------------------------------------------------------------*/
+
+#messages2{
+    width: 450px;
+}
+
+#message2{
+    margin-bottom: 0px;
+    margin-left:10px;
+}
+
+#postusername2{
+    margin-top:5px;
+    margin-bottom: 0px;
+    margin-left:10px;
+}
+
+#date2{
+    color: rgb(175, 182, 190);
+    font-size: 10px;
+    margin-left:290px;
+}
+
+#postusername2, #date2{
+    display: inline;
 }

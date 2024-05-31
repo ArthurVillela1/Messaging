@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/messages/edit/<%=messageToUpdate._id %>?_method=PUT" method="POST">
+        <label for="content">Edit your message:</label>
+        <input type="text" name="content" id="content">
+
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
