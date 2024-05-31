@@ -9,7 +9,6 @@ const authController = require('../../controllers/auth.js');
 const messagesController = require('../../controllers/messages.js');
 
 // Require express framework -> Provides broad features for building web and mobile applications
-const express = require('express');
 const app = express();
 
 // Allows us to have PUT and DELETE requests made from html forms
