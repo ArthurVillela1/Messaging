@@ -1,53 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/stylesheets/main.css">
 </head>
+
 <body>
     <%- include('./partials/nav') %>
-    <% if (userSession) { %>
-    <p>Hey <%= user.username %>!</p>
-    <form action="/messages/main" method="POST">
-        <label for="content">What are you thinking?</label>
-        <input type="text" name="content" id="content">
-        <button type="submit" id="postbutton" role="button">Post</button>
-    </form>
-    <div id="messages">
-    <ul>
-        <% messages.reverse().forEach((message,index) => { %>
-            <% if(index < 20) { %>
-            <li>
-                <p class="paragraph" id="postusername"><b><%= message.createdBy.username %></b></p>
-                <!--<p id="date"><%= moment(message.createdAt).format("D/MM/YY") %></p>-->
-                <p class="paragraph" id="message"><%= message.content %></p>
-                <p id="buttons"><% if (message.createdBy._id.toString() === userSession.userId) { %>
-                    <form action="/messages/main/<%= message._id %>?_method=DELETE" method="POST" style="display:inline;">
-                        <button type="submit" id="deletebutton">Delete</button>
-                        <button id="editbutton"><a id="editbuttonanchor" href="/messages/edit/<%= message._id %>">Edit</a></button>
-                    </form>
-                    <% } %>
-                </p> 
-            </li>
-            <% } %>
-        <% }) %>
-    </ul>
-    </div>
-    <% } else {%>
-    <div id="messages2">
-        <ul>
-            <% messages.reverse().forEach((message,index) => { %>
-                <% if(index < 20) { %>
-                <li>
-                    <p id="postusername2"><b><%= message.createdBy.username %></b></p><p id="date2"><%= moment(message.createdAt).format("D/MM/YY") %></p>
-                    <p id="message2"><%= message.content %></p>
-                </li>
+        <% if (userSession) { %>
+            <p>Hey <%= user.username %>!</p>
+            <form action="/messages/main" method="POST">
+                <label for="content">What are you thinking?</label>
+                <input type="text" name="content" id="content">
+                <button type="submit" id="postbutton" role="button">Post</button>
+            </form>
+            <div id="messages">
+                <ul>
+                    <% messages.reverse().forEach((message,index)=> { %>
+                        <% if(index < 20) { %>
+                            <li>
+                                <div id="divcontent">
+                                    <p class="paragraph" id="postusername"><b>
+                                            <%= message.createdBy.username %>
+                                        </b></p>
+                                    <p class="paragraph" id="message">
+                                        <%= message.content %>
+                                    </p>
+                                </div>
+                                <div id="buttonsdiv">
+                                    <p id="date">
+                                        <%= moment(message.createdAt).format("D/MM/YY") %>
+                                    </p>
+                                    <p id="buttons">
+                                        <% if (message.createdBy._id.toString()===userSession.userId) { %>
+                                            <form action="/messages/main/<%= message._id %>?_method=DELETE"
+                                                method="POST" style="display:inline;">
+                                                <button type="submit" id="deletebutton">Delete</button>
+                                                <button id="editbutton"><a id="editbuttonanchor"
+                                                        href="/messages/edit/<%= message._id %>">Edit</a></button>
+                                            </form>
+                                            <% } %>
+                                    </p>
+                                </div>
+                            </li>
+                            <% } %>
+                                <% }) %>
+                </ul>
+            </div>
+            <% } else {%>
+                    <ul>
+                        <% messages.reverse().forEach((message,index)=> { %>
+                            <% if(index < 20) { %>
+                                <li>
+                                <div id="divcontent">
+                                    <p id="postusername"><b>
+                                            <%= message.createdBy.username %>
+                                        </b></p>
+                                    <p id="message">
+                                            <%= message.content %>
+                                    </p>
+                                </div>
+                                <div id="buttonsdiv">
+                                    <p id="date">
+                                        <%= moment(message.createdAt).format("D/MM/YY") %>
+                                    </p>
+                                </div>
+                                </li>
+                                <% } %>
+                                    <% }) %>
+                    </ul>
                 <% } %>
-            <% }) %>
-        </ul>
-        </div>
-    <% } %>
 </body>
+
 </html>

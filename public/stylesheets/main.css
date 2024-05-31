@@ -81,10 +81,7 @@ html {
     cursor: pointer;
 }
 
-#buttonsdiv{
-    margin-left:330px;
-    margin-bottom:300px;
-}
+
 /*-------------------------------------------------------------*/
 
 ul {
@@ -92,15 +89,22 @@ ul {
 }
   
 li {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
     opacity: 0.9;
     border-radius: 15px;
     border: solid rgb(180, 208,240) 4px;
     margin-bottom: 7px;
     background-color: rgb(224, 234, 249);
     height:110px;
-    max-height: 110px;
+    max-height: 70px;
     width: 400px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+#buttonsdiv{
+    flex-direction: column;
 }
 
 .paragraph{
@@ -108,12 +112,14 @@ li {
 }
 
 #date{
+    display:flex;
+    justify-content: flex-end;
     border: transparent;
     background-color: transparent;
     font-size: 10px;
     color: rgb(175, 182, 190);
     font-family: "Comic Sans MS", "Comic Sans", cursive;
-    margin-left:300px;
+    margin-right: 10px;
 }
 /*-------------------------------------------------------------*/
 
@@ -135,7 +141,6 @@ li {
 #date2{
     color: rgb(175, 182, 190);
     font-size: 10px;
-    margin-left:290px;
 }
 
 #postusername2, #date2{

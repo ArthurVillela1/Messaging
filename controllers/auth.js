@@ -64,13 +64,11 @@ router.post('/sign-in', async (req, res) => {
 
     if (passwordsMatch) {
       res.redirect("/messages/main");
+    } else {
+      return res.send(`Login Failed`);
     }
   }catch(err){
-    if (!passwordsMatch) {
-      return res.send(`Login Failed`);
-    } else {
     return res.send('Please fill in the required fields.');
-    }
   }
 });
 
