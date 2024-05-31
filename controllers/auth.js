@@ -34,6 +34,10 @@ router.post('/sign-up', async (req, res) => {
     if(req.body.password !== req.body.confirmPassword){
         return res.send("Passwords don't match.")
       }
+    
+    if(!req.body.password || !req.body.confirmPassword){
+        return res.send('Please fill in the required fields.');
+    }
 
       const hash = bcrypt.hashSync(req.body.password, 10);
       req.body.password = hash;
@@ -65,10 +69,10 @@ router.post('/sign-in', async (req, res) => {
     if (passwordsMatch) {
       res.redirect("/messages/main");
     } else {
-      return res.send(`Login Failed`);
+      return res.send("Passwords don't match.");
     }
   }catch(err){
-    return res.send('Please fill in the required fields.');
+    return res.send('Login Failed.');
   }
 });
 

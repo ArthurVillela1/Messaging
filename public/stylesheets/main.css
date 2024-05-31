@@ -47,6 +47,7 @@ html {
 #content, #postbutton {
     border-radius: 9px;
     border-width: 1.5px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 /*-------------------------------------------------------------*/

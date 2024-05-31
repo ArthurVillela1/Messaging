@@ -51,27 +51,29 @@
                 </ul>
             </div>
             <% } else {%>
+                <div id="messages">
                     <ul>
                         <% messages.reverse().forEach((message,index)=> { %>
                             <% if(index < 20) { %>
                                 <li>
-                                <div id="divcontent">
-                                    <p id="postusername"><b>
-                                            <%= message.createdBy.username %>
-                                        </b></p>
-                                    <p id="message">
+                                    <div id="divcontent">
+                                        <p class="paragraph" id="postusername"><b>
+                                                <%= message.createdBy.username %>
+                                            </b></p>
+                                        <p class="paragraph" id="message">
                                             <%= message.content %>
-                                    </p>
-                                </div>
-                                <div id="buttonsdiv">
-                                    <p id="date">
-                                        <%= moment(message.createdAt).format("D/MM/YY") %>
-                                    </p>
-                                </div>
+                                        </p>
+                                    </div>
+                                    <div id="buttonsdiv">
+                                        <p id="date">
+                                            <%= moment(message.createdAt).format("D/MM/YY") %>
+                                        </p>
+                                    </div>
                                 </li>
                                 <% } %>
                                     <% }) %>
                     </ul>
+                </div>
                 <% } %>
 </body>
 
