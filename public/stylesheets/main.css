@@ -92,19 +92,30 @@ ul {
 }
   
 li {
+    opacity: 0.9;
     border-radius: 15px;
     border: solid rgb(180, 208,240) 4px;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
     background-color: rgb(224, 234, 249);
     height:75px;
     max-height: 80px;
-    width: 420px;
+    width: 400px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
 }
 
 .paragraph{
     margin:10px;
 }
 
+#date{
+    border: transparent;
+    background-color: transparent;
+    font-size: 10px;
+    color: rgb(175, 182, 190);
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    margin-left:300px;
+}
 /*-------------------------------------------------------------*/
 
 #messages2{
