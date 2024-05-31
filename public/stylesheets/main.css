@@ -97,11 +97,10 @@ li {
     border: solid rgb(180, 208,240) 4px;
     margin-bottom: 7px;
     background-color: rgb(224, 234, 249);
-    height:75px;
-    max-height: 80px;
+    height:110px;
+    max-height: 110px;
     width: 400px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-
 }
 
 .paragraph{
