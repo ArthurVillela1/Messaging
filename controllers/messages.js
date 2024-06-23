@@ -7,16 +7,16 @@ const moment = require("moment")
 //GET main page
 router.get("/main", async (req, res) => {
     //try {
-        const messages = await Message.find().populate('createdBy')
-        const userSession = req.session.user
-        //const userId = await Message.find(req.session.user.userId);
-        res.render('../views/main.ejs', {
-            messages: messages, // pass through the messages to ejs template.
-            userSession: userSession,
-            moment: moment
-        })
+    const messages = await Message.find().populate('createdBy')
+    const userSession = req.session.user
+    //const userId = await Message.find(req.session.user.userId);
+    res.render('../views/main.ejs', {
+        messages: messages, // pass through the messages to ejs template.
+        userSession: userSession,
+        moment: moment
+    })
     //} catch (){
-        
+
     //}
 })
 
@@ -33,10 +33,10 @@ router.post('/main', async (req, res) => {
             res.redirect('/messages/main')
         } catch (err) {
             if (err.name === 'ValidationError') {
-                res.redirect('/messages/main')  
+                res.redirect('/messages/main')
             }
         }
-    }else{
+    } else {
         let errorMsg = 'Comment must be 30 characters or less.';
         return res.send(errorMsg);
     }
@@ -44,12 +44,12 @@ router.post('/main', async (req, res) => {
 
 // DELETE message
 router.delete('/main/:id', async (req, res) => {
-      const deletedmessage = await Message.findByIdAndDelete(req.params.id);
-      res.redirect('/messages/main')
+    const deletedmessage = await Message.findByIdAndDelete(req.params.id);
+    res.redirect('/messages/main')
 })
- 
+
 // EDIT message
-router.get('/edit/:id', async (req, res) =>{
+router.get('/edit/:id', async (req, res) => {
     const id = req.params.id
     const messageToUpdate = await Message.findById(id)
 

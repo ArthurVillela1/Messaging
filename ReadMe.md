@@ -42,7 +42,7 @@ Message board
 
 ### Javascript
 
-Controllers
+Auth Controllers
 
 ```js
 const express = require("express");
@@ -52,8 +52,8 @@ const bcrypt = require("bcrypt");
 
 // GET sign-in
 router.get('/sign-in', (req, res) => {
-    res.render('auth/sign-in.ejs');
- });
+  res.render('auth/sign-in.ejs');
+});
 
 // GET sign-up
 router.get('/sign-up', (req, res) => {
@@ -65,40 +65,40 @@ router.post('/sign-up', async (req, res) => {
   const { username } = req.body;
   const { password } = req.body;
   const userInDatabase = await User.findOne({ username: req.body.username });
-  try{
-    if (username.length > 10){
+  try {
+    if (username.length > 10) {
       return res.send('Username must be 10 characters or less.');
-      }  
-    
-    if (password.length > 8){
+    }
+
+    if (password.length > 8) {
       return res.send('Username must be 8 characters or less.');
-      } 
+    }
 
     if (userInDatabase) {
-        return res.send('Username already taken.');
-      }
-
-    if(req.body.password !== req.body.confirmPassword){
-        return res.send("Passwords don't match.")
-      }
-    
-    if(!req.body.password || !req.body.confirmPassword){
-        return res.send('Please fill in the required fields.');
+      return res.send('Username already taken.');
     }
 
-      const hash = bcrypt.hashSync(req.body.password, 10);
-      req.body.password = hash;
+    if (req.body.password !== req.body.confirmPassword) {
+      return res.send("Passwords don't match.")
+    }
 
-      const user = await User.create(req.body);
-      res.redirect("/auth/sign-in")
-    }catch(err){
+    if (!req.body.password || !req.body.confirmPassword) {
       return res.send('Please fill in the required fields.');
     }
+
+    const hash = bcrypt.hashSync(req.body.password, 10);
+    req.body.password = hash;
+
+    const user = await User.create(req.body);
+    res.redirect("/auth/sign-in")
+  } catch (err) {
+    return res.send('Please fill in the required fields.');
+  }
 });
 
 // POST sign-in
 router.post('/sign-in', async (req, res) => {
-  try{
+  try {
     const userFromDatabase = await User.findOne({
       username: req.body.username,
     });
@@ -107,7 +107,7 @@ router.post('/sign-in', async (req, res) => {
       req.body.password,
       userFromDatabase.password
     );
-    
+
     req.session.user = {
       username: userFromDatabase.username,
       userId: userFromDatabase._id,
@@ -118,19 +118,91 @@ router.post('/sign-in', async (req, res) => {
     } else {
       return res.send("Passwords don't match.");
     }
-  }catch(err){
+  } catch (err) {
     return res.send('Login Failed.');
   }
 });
 
 // GET sign-out
 router.get("/sign-out", (req, res) => {
-    req.session.destroy();
-    res.redirect("/");
+  req.session.destroy();
+  res.redirect("/");
 })
 
 module.exports = router;
 
+```
+
+CRUD Controllers
+
+```js
+const express = require("express");
+const router = express.Router();
+const Message = require("../models/message.js");
+const moment = require("moment")
+
+// Routs (endpoints):
+//GET main page
+router.get("/main", async (req, res) => {
+    //try {
+    const messages = await Message.find().populate('createdBy')
+    const userSession = req.session.user
+    //const userId = await Message.find(req.session.user.userId);
+    res.render('../views/main.ejs', {
+        messages: messages, // pass through the messages to ejs template.
+        userSession: userSession,
+        moment: moment
+    })
+    //} catch (){
+
+    //}
+})
+
+//POST message
+router.post('/main', async (req, res) => {
+    const { content } = req.body;
+    if (content.length <= 30) {
+        try {
+            // Create the message using mongoose.
+            req.body.createdBy = req.session.user.userId
+            const message = await Message.create(req.body)
+
+            // Send back the new message to the user.
+            res.redirect('/messages/main')
+        } catch (err) {
+            if (err.name === 'ValidationError') {
+                res.redirect('/messages/main')
+            }
+        }
+    } else {
+        let errorMsg = 'Comment must be 30 characters or less.';
+        return res.send(errorMsg);
+    }
+})
+
+// DELETE message
+router.delete('/main/:id', async (req, res) => {
+    const deletedmessage = await Message.findByIdAndDelete(req.params.id);
+    res.redirect('/messages/main')
+})
+
+// EDIT message
+router.get('/edit/:id', async (req, res) => {
+    const id = req.params.id
+    const messageToUpdate = await Message.findById(id)
+
+    res.render('../views/edit.ejs', {
+        messageToUpdate: messageToUpdate
+    })
+})
+
+router.put('/edit/:id', async (req, res) => {
+    const messageUpdate = await Message.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.redirect('/messages/main')
+})
+
+
+module.exports = router;
 ```
 
 Server

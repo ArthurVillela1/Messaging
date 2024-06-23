@@ -43,18 +43,18 @@ app.use(express.static(path.join(__dirname, "public")));
 // These cookies are only alive when the server is running
 // These cookies exist regardless of the user being signed in
 app.use(
-    session({
-      secret: process.env.SECRET_PASSWORD, // Replace with a strong secret key
-      resave: false, // Forces the session to be saved back to the store, even if it wasn't modified
-      saveUninitialized: true, // Forces a session that is "uninitialized" to be saved to the store
-      cookie: { secure: false }, // Secure should be true in production if you're using HTTPS
-    })
+  session({
+    secret: process.env.SECRET_PASSWORD, // Replace with a strong secret key
+    resave: false, // Forces the session to be saved back to the store, even if it wasn't modified
+    saveUninitialized: true, // Forces a session that is "uninitialized" to be saved to the store
+    cookie: { secure: false }, // Secure should be true in production if you're using HTTPS
+  })
 );
 
 // Enables function globally in the browser
 app.use(function (req, res, next) {
-    res.locals.user = req.session.user;
-    next();
+  res.locals.user = req.session.user;
+  next();
 });
 
 // Accessing the controllers to enable HTTP requests (get, post, put and delete)
@@ -63,9 +63,9 @@ app.use('/messages', messagesController);
 
 // Landing page
 app.get('/', (req, res) => {
-    res.render('home.ejs', {
-      user: req.session.user,
-    });
+  res.render('home.ejs', {
+    user: req.session.user,
+  });
 });
 
 // If the port doesn't exist, define it as 3000
