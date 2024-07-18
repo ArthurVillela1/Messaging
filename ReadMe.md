@@ -1,6 +1,8 @@
 # Messaging Board App
 Messaging Board app is a web application designed for users to interact with each other through instant messaging.
 
+[Click here to use this app](https://main--messaging-board-project.netlify.app/)
+
 ## Technologies Used
 - **Javascript**: Back-end structure
 
